@@ -15,8 +15,9 @@ void generateDeck(card* deckOfCards[]);
 void shuffleDeck(card* deckOfCards[]);
 int chooseRank();
 int chooseSuit();
-void assignPlayersDec(vector<vector<card> > numOfPlayers,card* deckOfCards[]);
-void duel();
+void assignPlayersDec(vector<vector<card> >& numOfPlayers,card* deckOfCards[]);
+void duel(vector<vector<card> >& numOfPlayers);
+int getMax(card cardPot[]);
 
 int main()
 {
@@ -30,11 +31,47 @@ int main()
 	//This is the players cards made out of vector so we don't have to delete and add manually
 	vector<vector<card> > numOfPlayers(CARDPLAYER, vector<card>(52/CARDPLAYER));
 	assignPlayersDec(numOfPlayers,deckOfCards);
+//	duel( numOfPlayers);
 
 	return 0;
 }
+/*void duel(vector<vector<card> >& numOfPlayers)
+{
+	int counter = 0;
+	card cardPot[CARDPLAYER];	
 
-void assignPlayersDec(vector<vector<card> > numOfPlayers,card* deckOfCards[])
+	for(int j =0; j < 52/ CARDPLAYER; ++j)
+	{
+		for(int i =0; i < CARDPLAYER; ++i)
+		{
+			cardPot[i] = numOfPlayers[i][j];
+		}
+		for(int z=0; z <CARDPLAYER; ++z)
+		{
+			if(cardPot[z].cardRank == getMax[cardPot])
+			{
+				while(counter != CARDPLAYER)
+				{
+					numOfPlayers[counter][j]
+				}
+			}
+		}
+	}
+}*/
+int getMax(card cardPot[])
+{
+	int max= -1;
+
+	for(int i =0; i <CARDPLAYER; ++i)
+	{
+		if(cardPot[i].cardRank > max)
+		{
+			max = cardPot[i].cardRank;
+		}
+	}
+	return max;
+}
+void assignPlayersDec(vector<vector<card> >& numOfPlayers,card* deckOfCards[])
 {
 	int counter = 0;
 	int counter2 =0;
@@ -54,14 +91,14 @@ void assignPlayersDec(vector<vector<card> > numOfPlayers,card* deckOfCards[])
 			++counter;
 		}
 	}
-	for(int i = 0; i < CARDPLAYER; ++i)
+/*	for(int i = 0; i < CARDPLAYER; ++i)
 	{
 		for(int j =0; j < 52/ CARDPLAYER; ++j)
 		{
 			cout << "(" << numOfPlayers[i][j].cardSuit <<  "," << numOfPlayers[i][j].cardRank << ")";	
 		}
 		cout << endl;
-	}
+	}*/
 }
 
 /*
