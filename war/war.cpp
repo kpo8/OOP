@@ -1,10 +1,12 @@
 #include<iostream>
 #include<math.h>
 #include <algorithm>
+#include <vector>
 #include "war.hpp"
 
 using std::cout;
 using std::endl;
+using std::vector;
 
 // how many players are playing up to 4
 #define CARDPLAYER 2
@@ -13,6 +15,8 @@ void generateDeck(card* deckOfCards[]);
 void shuffleDeck(card* deckOfCards[]);
 int chooseRank();
 int chooseSuit();
+void assignPlayersDec(vector<vector<card> > numOfPlayers,card* deckOfCards[]);
+void duel();
 
 int main()
 {
@@ -20,9 +24,44 @@ int main()
 	//Making enum attributes of struct safeguards passing faulty values to the struct, therefore no need to catch
 	//faulty initialization with contructor.
 	card* deckOfCards[4];	
-	generateDeck(deckOfCards);	
+	generateDeck(deckOfCards);
 	shuffleDeck(deckOfCards);
+
+	//This is the players cards made out of vector so we don't have to delete and add manually
+	vector<vector<card> > numOfPlayers(CARDPLAYER, vector<card>(52/CARDPLAYER));
+	assignPlayersDec(numOfPlayers,deckOfCards);
+
 	return 0;
+}
+
+void assignPlayersDec(vector<vector<card> > numOfPlayers,card* deckOfCards[])
+{
+	int counter = 0;
+	int counter2 =0;
+	for(int i = 0; i < 4; ++i)
+	{
+		for(int j =0; j < 13; ++j)
+		{
+			if(counter == CARDPLAYER)
+			{
+				counter =0;
+				++counter2;
+			}
+			if(counter2 < 52/CARDPLAYER)
+			{	
+				numOfPlayers[counter][counter2] = deckOfCards[i][j];
+			}
+			++counter;
+		}
+	}
+	for(int i = 0; i < CARDPLAYER; ++i)
+	{
+		for(int j =0; j < 52/ CARDPLAYER; ++j)
+		{
+			cout << "(" << numOfPlayers[i][j].cardSuit <<  "," << numOfPlayers[i][j].cardRank << ")";	
+		}
+		cout << endl;
+	}
 }
 
 /*
