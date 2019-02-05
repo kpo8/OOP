@@ -7,159 +7,54 @@
 using std::cout;
 using std::endl;
 using std::vector;
+using std::random_shuffle;
 
 // how many players are playing up to 4
 #define CARDPLAYER 2
 
-void generateDeck(card* deckOfCards[]);
-void shuffleDeck(card* deckOfCards[]);
-int chooseRank();
-int chooseSuit();
-void assignPlayersDec(vector<vector<card> >& numOfPlayers,card* deckOfCards[]);
-void duel(vector<vector<card> >& numOfPlayers);
-int getMax(card cardPot[]);
+void generateDeck(vector<card>& deckOfCards);
+void shuffleDeck(vector<card>& deckOfCards);
 
 int main()
 {
 	srand((unsigned)time(0));
 	//Making enum attributes of struct safeguards passing faulty values to the struct, therefore no need to catch
 	//faulty initialization with contructor.
-	card* deckOfCards[4];	
+	vector<card> deckOfCards;	
 	generateDeck(deckOfCards);
 	shuffleDeck(deckOfCards);
-
-	//This is the players cards made out of vector so we don't have to delete and add manually
-	vector<vector<card> > numOfPlayers(CARDPLAYER, vector<card>(52/CARDPLAYER));
-	assignPlayersDec(numOfPlayers,deckOfCards);
-//	duel( numOfPlayers);
-
+	for(int i =0; i<52;++i)
+	{
+		cout << "suit: " << deckOfCards[i].cardSuit << " " << "rank: "<< deckOfCards[i].cardRank << endl;
+	}
+	
 	return 0;
 }
-/*void duel(vector<vector<card> >& numOfPlayers)
-{
-	int counter = 0;
-	card cardPot[CARDPLAYER];	
 
-	for(int j =0; j < 52/ CARDPLAYER; ++j)
-	{
-		for(int i =0; i < CARDPLAYER; ++i)
-		{
-			cardPot[i] = numOfPlayers[i][j];
-		}
-		for(int z=0; z <CARDPLAYER; ++z)
-		{
-			if(cardPot[z].cardRank == getMax[cardPot])
-			{
-				while(counter != CARDPLAYER)
-				{
-					numOfPlayers[counter][j]
-				}
-			}
-		}
-	}
-}*/
-int getMax(card cardPot[])
-{
-	int max= -1;
-
-	for(int i =0; i <CARDPLAYER; ++i)
-	{
-		if(cardPot[i].cardRank > max)
-		{
-			max = cardPot[i].cardRank;
-		}
-	}
-	return max;
-}
-void assignPlayersDec(vector<vector<card> >& numOfPlayers,card* deckOfCards[])
-{
-	int counter = 0;
-	int counter2 =0;
-	for(int i = 0; i < 4; ++i)
-	{
-		for(int j =0; j < 13; ++j)
-		{
-			if(counter == CARDPLAYER)
-			{
-				counter =0;
-				++counter2;
-			}
-			if(counter2 < 52/CARDPLAYER)
-			{	
-				numOfPlayers[counter][counter2] = deckOfCards[i][j];
-			}
-			++counter;
-		}
-	}
-/*	for(int i = 0; i < CARDPLAYER; ++i)
-	{
-		for(int j =0; j < 52/ CARDPLAYER; ++j)
-		{
-			cout << "(" << numOfPlayers[i][j].cardSuit <<  "," << numOfPlayers[i][j].cardRank << ")";	
-		}
-		cout << endl;
-	}*/
-}
-
-/*
- This function shuffles the deck
- This takes array of pointers deckOfCards
- This returns nothing
- */	
-void shuffleDeck(card* deckOfCards[])
-{
-	for(int i=0; i < 4; ++i)
-	{
-		for(int j=0; j <13; ++j)
-		{
-			int rank = chooseRank();
-			int suit = chooseSuit();
-			std::swap(deckOfCards[i][j].cardSuit, deckOfCards[suit][rank].cardSuit);
-			std::swap(deckOfCards[i][j].cardRank, deckOfCards[suit][rank].cardRank); 
-		}
-	}
-}
-
-/*This function picks a random rank
- * Takes nothing
- * Returns nothing
+/*This functuion geberates the carddeck
+ * Takes vector of structs
+ * shuffles deck
+ * returns nothing
  */
-int chooseRank()
+void shuffleDeck(vector<card>& deckOfCards)
 {
-	//sets a float equal to a random number
-	//seeded in main
-	//rounds up random number and multiple by power of ten
-	int holder = round(((static_cast<float>(rand())/RAND_MAX)*12));
-	return holder;
-}
-
-/*This function picks a random suit
- * Takes nothing
- * Returns nothing
- */
-int chooseSuit()
-{
-	//sets a float equal to a random number
-	//seeded in main
-	//rounds up random number and multiple by power of ten
-	int holder = round(((static_cast<float>(rand())/RAND_MAX)*3));
-	return holder;
+	random_shuffle(deckOfCards.begin(), deckOfCards.end());
 }
 
 /*This function generates the carddeck
  * Takes array of pointers deckOfCards
  * This returns nothing
  */
-void generateDeck(card* deckOfCards[])
-{	
+void generateDeck(vector <card>& deckOfCards)
+{
+	card pushBackCard;
 	for(int i=0; i < 4; ++i)
 	{
-		deckOfCards[i] = new card[13];
-
-		for(int j=0; j <13; ++j)
+		for(int j=0; j< 13; ++j)
 		{
-			deckOfCards[i][j].cardSuit = static_cast<suits>(i);
-			deckOfCards[i][j].cardRank = static_cast<rank>(j);
+			pushBackCard.cardSuit = static_cast<suits>(i);
+			pushBackCard.cardRank = static_cast<rank>(j);
+			deckOfCards.push_back(pushBackCard); 
 		}
 	}
 }
