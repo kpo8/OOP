@@ -1,5 +1,28 @@
 #include "warFunctions.hpp"
 
+
+void startGame::game()
+{
+	srand((unsigned)time(0));
+        //Making enum attributes of struct safeguards passing faulty values to the struct, therefore no need to catch
+        //faulty initialization with contructor.
+        vector<card> deckOfCards;
+        generateDeck(deckOfCards);
+        shuffleDeck(deckOfCards);
+
+        //Our players
+        vector<card> player1;
+        vector<card> player2;
+
+        assignCards(deckOfCards, player1, player2);
+        cout <<"player1" << endl;
+        spotCheck(player1);
+        cout <<"player2" <<endl;
+        spotCheck(player2);
+
+        duel(player1,player2);
+}
+
 /*In case of a tie implement war scenario
  * takes vector card player 1 and player 2 as well a current cards
  * returns nothing

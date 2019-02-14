@@ -2,7 +2,7 @@
 #define WARFUNCTIONS_H
 
 	//Type for suits
-	enum suits
+	unsigned enum suits
 	{
 		hearts,
 		diamonds,
@@ -10,7 +10,7 @@
 		clubs
 	};
 	//type for ranks
-	enum rank
+	unsigned enum rank
 	{
 		two,
 		three,
@@ -30,25 +30,20 @@
 	//struct for playing card
 	struct card
 	{
-		suits cardSuit;
-		rank  cardRank;
-		//leave in here in case something changes
-		/*card ()
-		{
-			//Guardrail to catch bad initialization of suit
-			if(cardSuit > 3 || cardSuit < 0) 
-			{
-				std::cout << "bad suit" << std::endl; 
-				abort();
-			}
-			//Guardrail to catch bad initilization of rank
-			if(cardSuit > 3 || cardSuit < 0) 
-			{
-				std::cout << "bad rank" << std::endl;
-				abort();
-			}
-		}*/
+		 suits cardSuit;
+		 rank  cardRank;
 	};
+	class startGame
+	{
+		public:
+
+		startGame()
+		{
+
+		}
+		void game();			
+	};
+
 void generateDeck(vector<card>& deckOfCards);
 void shuffleDeck(vector<card>& deckOfCards);
 void spotCheck(vector<card>& deckOfCards);
