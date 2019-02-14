@@ -30,8 +30,8 @@
 	//struct for playing card
 	struct card
 	{
-		 suits cardSuit;
-		 rank  cardRank;
+		 suits cardSuit: 2;
+		 rank  cardRank: 4;
 	};
 	class startGame
 	{
