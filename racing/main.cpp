@@ -6,7 +6,8 @@ using namespace sf;
 
 #include "racing.hpp"
 #include "racing.cpp"
-
+#include "keyControls.hpp"
+#include "keyControls.cpp"
 int main()
 {
 	RenderWindow app(VideoMode(640, 480), "Car Racing Game!");
@@ -52,26 +53,12 @@ int main()
 			}
 		}
 
-		bool Up = 0, Right = 0, Down = 0, Left = 0;
-		if (Keyboard::isKeyPressed(Keyboard::Up))
-		{
-			Up = 1;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Right))
-		{
-			Right = 1;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Down))
-		{
-			Down = 1;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Left))
-		{
-			Left = 1;
-		}
-
-			// car movement
-		if (Up && speed < maxSpeed) 
+		//Get key input 
+		keyControls direction;
+		direction.getDirection();	
+		
+		// car movement
+		if (direction.up && speed < maxSpeed) 
 		{
       			if (speed < 0)
 			{
@@ -83,7 +70,7 @@ int main()
 			}
 		}
 
-		if (Down && speed > -maxSpeed) 
+		if (direction.down && speed > -maxSpeed) 
 		{
 			if (speed > 0)
 			{
@@ -95,7 +82,7 @@ int main()
 			}
     		}
 
-		if (!Up && !Down)
+		if (!direction.up && !direction.down)
 		{
 			if (speed - dec > 0)
 			{
@@ -111,11 +98,11 @@ int main()
 			}
 		}
 
-		if (Right && speed != 0)
+		if (direction.right && speed != 0)
 		{
 			angle += turnSpeed * speed / maxSpeed;
 		}
-		if (Left && speed != 0)
+		if (direction.left && speed != 0)
 		{
 			angle -= turnSpeed * speed / maxSpeed;
 		}
