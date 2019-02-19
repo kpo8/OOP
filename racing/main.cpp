@@ -8,6 +8,9 @@ using namespace sf;
 #include "racing.cpp"
 #include "keyControls.hpp"
 #include "keyControls.cpp"
+#include "carSpeed.hpp"
+#include "carSpeed.cpp"
+
 int main()
 {
 	RenderWindow app(VideoMode(640, 480), "Car Racing Game!");
@@ -34,14 +37,8 @@ int main()
 		car[i].y = 1700 + i * 80;
 		car[i].speed = 7 + i;
 	}
-
-	float speed = 0, angle = 0;
-	float maxSpeed = 12.0;
-	float acc = 0.2, dec = 0.3;
-	float turnSpeed = 0.08;
-
-	int offsetX = 0, offsetY = 0;
-
+	carSpeed currentSpeed;
+	
 	while (app.isOpen()) 
 	{
 		Event e;
@@ -58,67 +55,7 @@ int main()
 		direction.getDirection();	
 		
 		// car movement
-		if (direction.up && speed < maxSpeed) 
-		{
-      			if (speed < 0)
-			{
-        			speed += dec;
-			}
-			else
-			{
-        			speed += acc;
-			}
-		}
-
-		if (direction.down && speed > -maxSpeed) 
-		{
-			if (speed > 0)
-			{
-				speed -= dec;
-			}
-			else
-			{
-				speed -= acc;
-			}
-    		}
-
-		if (!direction.up && !direction.down)
-		{
-			if (speed - dec > 0)
-			{
-				speed -= dec;
-			}
-			else if (speed + dec < 0)
-			{
-				speed += dec;
-			}
-			else
-			{
-				speed = 0;
-			}
-		}
-
-		if (direction.right && speed != 0)
-		{
-			angle += turnSpeed * speed / maxSpeed;
-		}
-		if (direction.left && speed != 0)
-		{
-			angle -= turnSpeed * speed / maxSpeed;
-		}
-		
-		car[0].speed = speed;
-		car[0].angle = angle;
-
-		for (int i = 0; i < N; i++)
-		{
-			car[i].move();
-		}
-		for (int i = 1; i < N; i++)
-		{
-			car[i].findTarget();
-		}
-
+		currentSpeed.getSpeed(direction,car,R,N);	
 		// collision
 
 		for (int i = 0; i < N; i++)
@@ -146,14 +83,14 @@ int main()
 
 		if (car[0].x > 320)
 		{
-			offsetX = car[0].x - 320;
+			currentSpeed.offsetX = car[0].x - 320;
 		}
 		if (car[0].y > 240)
 		{
-			offsetY = car[0].y - 240;
+			currentSpeed.offsetY = car[0].y - 240;
 		}
 		
-		sBackground.setPosition(-offsetX, -offsetY);
+		sBackground.setPosition(-currentSpeed.offsetX, -currentSpeed.offsetY);
 		app.draw(sBackground);
 
 		Color colors[10] = 
@@ -163,7 +100,7 @@ int main()
 
 		for (int i = 0; i < N; i++) 
 		{
-			sCar.setPosition(car[i].x - offsetX, car[i].y - offsetY);
+			sCar.setPosition(car[i].x - currentSpeed.offsetX, car[i].y - currentSpeed.offsetY);
 			sCar.setRotation(car[i].angle * 180 / 3.141593);
 			sCar.setColor(colors[i]);
 			app.draw(sCar);
