@@ -5,6 +5,7 @@
 using namespace sf;
 
 #include "racing.hpp"
+#include "racing.cpp"
 
 int main()
 {
