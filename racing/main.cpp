@@ -4,8 +4,8 @@
 
 using namespace sf;
 
-#include "racing.hpp"
-#include "racing.cpp"
+#include "car.hpp"
+#include "car.cpp"
 #include "keyControls.hpp"
 #include "keyControls.cpp"
 #include "carSpeed.hpp"
@@ -57,27 +57,8 @@ int main()
 		// car movement
 		currentSpeed.getSpeed(direction,car,R,N);	
 		// collision
-
-		for (int i = 0; i < N; i++)
-		{
-			for (int j = 0; j < N; j++) 
-			{
-				int dx = 0, dy = 0;
-				while (dx * dx + dy * dy < 4 * R * R) 
-				{
-					car[i].x += dx / 10.0;
-					car[i].x += dy / 10.0;
-					car[j].x -= dx / 10.0;
-					car[j].y -= dy / 10.0;
-					dx = car[i].x - car[j].x;
-					dy = car[i].y - car[j].y;
-					if (!dx && !dy)
-					{
-						break;
-					}
-				}
-			}
-		}
+	
+		collision(car,N,R);	
 
 		app.clear(Color::White);
 

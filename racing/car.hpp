@@ -1,6 +1,6 @@
 //racing.hpp
-#ifndef RACING_HPP
-#define RACING_HPP
+#ifndef CAR_HPP
+#define CAR_HPP
 
 const int num = 8; // checkpoints
 int points[num][2] = {
@@ -28,4 +28,4 @@ struct Car
 
 };
 
-#endif /*RACING_H*/
+#endif /*CAR_H*/
