@@ -1,5 +1,11 @@
 #include "warFunctions.hpp"
 
+/*Gets joker color*/
+Color joker::getColor();
+{
+	return jokerColor;
+}
+
 /*In case of a tie implement war scenario
  * takes vector card player 1 and player 2 as well a current cards
  * returns nothing

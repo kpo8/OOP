@@ -26,7 +26,21 @@
 		king,
 		ace
 	};
-	
+	//color for jokers
+	enum color	
+	{	
+		black,
+		red,
+	}
+	struct joker
+	{
+		color jokerColor;
+		joker()
+		{
+
+		}
+		Color getColor();
+	}
 	//struct for playing card
 	struct card
 	{
