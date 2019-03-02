@@ -31,7 +31,13 @@
 	{	
 		black,
 		red,
-	}
+	};
+	//card for joker or card
+	enum whichCard
+	{
+		joker,
+		card,	
+	};
 	struct joker
 	{
 		color jokerColor;
@@ -46,22 +52,21 @@
 	{
 		suits cardSuit;
 		rank  cardRank;
-		//leave in here in case something changes
-		/*card ()
+	};
+
+	union cardData
+	{	
+		card regularCard;
+		joker jokerCard;
+
+		cardData(cardSuit suit, cardRank rank)
+		{	
+			regularCard(suit, rank);
+		}
+		cardColor(Color jokerColor)
 		{
-			//Guardrail to catch bad initialization of suit
-			if(cardSuit > 3 || cardSuit < 0) 
-			{
-				std::cout << "bad suit" << std::endl; 
-				abort();
-			}
-			//Guardrail to catch bad initilization of rank
-			if(cardSuit > 3 || cardSuit < 0) 
-			{
-				std::cout << "bad rank" << std::endl;
-				abort();
-			}
-		}*/
+			jokerCard(jokerColor);
+		}
 	};
 void generateDeck(vector<card>& deckOfCards);
 void shuffleDeck(vector<card>& deckOfCards);
