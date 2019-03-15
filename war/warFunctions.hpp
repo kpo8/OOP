@@ -27,28 +27,51 @@
 		ace
 	};
 	
+	enum color
+	{
+		red,
+		black,
+	}
+	
 	//struct for playing card
 	struct card
 	{
 		suits cardSuit;
 		rank  cardRank;
-		//leave in here in case something changes
-		/*card ()
-		{
-			//Guardrail to catch bad initialization of suit
-			if(cardSuit > 3 || cardSuit < 0) 
-			{
-				std::cout << "bad suit" << std::endl; 
-				abort();
-			}
-			//Guardrail to catch bad initilization of rank
-			if(cardSuit > 3 || cardSuit < 0) 
-			{
-				std::cout << "bad rank" << std::endl;
-				abort();
-			}
-		}*/
 	};
+	struct joker
+	{
+		color jokerColor;
+	}
+	
+	struct playingCard
+	{
+		card StandardCard;
+		joker Card;
+		
+		playingCard tag;
+
+		PlayingCard(Rank r, Suit s)
+		: tag(Standard), data(r, s)
+		{ }
+
+		bool is_standard() const
+		{
+			return tag=standard;
+		}
+		bool is_joker() const
+		{
+			tag=Joker;
+		}
+
+	}
+std::ostream& operator<<(std::ostream& os, suit s);
+std::ostream& operator<<(std::ostream& os, rank r);
+std::ostream& operator<<(std::ostream& os, color r);
+std::ostream& operator<<(std::ostream& os, playingCard c);
+std::ostream& operator<<(std::ostream& os, joker c);
+std::ostream& operator<<(std::ostream& os, card c);
+
 void generateDeck(vector<card>& deckOfCards);
 void shuffleDeck(vector<card>& deckOfCards);
 void spotCheck(vector<card>& deckOfCards);
