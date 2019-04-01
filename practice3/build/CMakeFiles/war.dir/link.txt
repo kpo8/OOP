@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/war.dir/war.cpp.o  -o ../war 

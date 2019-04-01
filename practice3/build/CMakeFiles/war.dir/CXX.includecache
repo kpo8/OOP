@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kpo8/Documents/OOP/war/war.cpp
+iostream
+-
+math.h
+-
+algorithm
+-
+vector
+-
+warFunctions.hpp
+/home/kpo8/Documents/OOP/war/warFunctions.hpp
+warFunctions.cpp
+/home/kpo8/Documents/OOP/war/warFunctions.cpp
+
+/home/kpo8/Documents/OOP/war/warFunctions.cpp
+warFunctions.hpp
+/home/kpo8/Documents/OOP/war/warFunctions.hpp
+
+/home/kpo8/Documents/OOP/war/warFunctions.hpp
+
