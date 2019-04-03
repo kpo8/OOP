@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kpo8/Documents/OOP/json/json.cpp
+json.hpp
+/home/kpo8/Documents/OOP/json/json.hpp
+cassert
+-
+iostream
+-
+sstream
+-
+
+/home/kpo8/Documents/OOP/json/json.hpp
+algorithm
+-
+string
+-
+vector
+-
+unordered_map
+-
+
+/home/kpo8/Documents/OOP/json/main.cpp
+json.hpp
+/home/kpo8/Documents/OOP/json/json.hpp
+redditClass.hpp
+/home/kpo8/Documents/OOP/json/redditClass.hpp
+iterator
+-
+iostream
+-
+string
+-
+
+/home/kpo8/Documents/OOP/json/redditClass.hpp
+string
+-
+
