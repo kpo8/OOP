@@ -24,7 +24,7 @@ void Car::findTarget()
 	}
 }
 
-void collision(Car car[], const int& N, float& R)
+void aiCollision(Car car[],Car pCar, const int& N, float& R)
 {
 	for(int i = 0; i < N; i++)
 	{
@@ -33,10 +33,10 @@ void collision(Car car[], const int& N, float& R)
                 	int dx = 0, dy = 0;
                         while (dx * dx + dy * dy < 4 * R * R)
                         {
-                        	car[i].x += dx / 2.0;
-                        	car[i].x += dy / 2.0;
-                        	car[j].x -= dx / 2.0;
-                        	car[j].y -= dy / 2.0;
+                        	car[i].x += dx / 4.0;
+                        	car[i].x += dy / 4.0;
+                        	car[j].x -= dx / 4.0;
+                        	car[j].y -= dy / 4.0;
                        		dx = car[i].x - car[j].x;
                                 dy = car[i].y - car[j].y;
                                 if (!dx && !dy)
@@ -45,5 +45,42 @@ void collision(Car car[], const int& N, float& R)
                                 }
                        }
                }
+	}	
+}
+//player collisions
+void pCollision(Car car[],Car pCar, const int& N, float& R)
+{
+	for(int i = 0; i < N; i++)
+	{	
+		int dx = 0, dy = 0;
+		while (dx * dx + dy * dy < 4 * R * R)
+		{
+			pCar.x += dx/4.0;
+			pCar.y += dy/4.0;
+			car[i].x -= dx / 4.0;
+			car[i].x -= dy / 4.0;
+			dx = pCar.x - car[i].x;
+			dy = pCar.y - car[i].y;
+			
+			if (!dx && !dy)
+			{
+				break;
+			}
+	       }
+		dx = 0, dy = 0;
+		while (dx * dx + dy * dy < 4 * R * R)
+		{
+			pCar.x -= dx/4.0;
+			pCar.y -= dy/4.0;
+			car[i].x += dx / 4.0;
+			car[i].x += dy / 4.0;
+			dx = car[i].x - pCar.x;
+			dy = car[i].y - pCar.y;
+			
+			if (!dx && !dy)
+			{
+				break;
+			}
+	       }       
 	}	
 }

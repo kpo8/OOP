@@ -58,11 +58,15 @@ void gameStart::game()
 
                 // car movement
                 currentSpeed.getSpeed(direction,car,R,N, pCar);
-                // collision
-                collision(car,N,R);
+                // collision with ai
+               aiCollision(car,pCar,N,R);
+
+	       //collision with player
+		pCollision(car,pCar,N,R);
+
 		
 		//collision with rock
-		rock.rockCollision(sRock,car, sCar, currentSpeed,N,pCar);
+		rock.rockCollision(sRock,car, playerCar, sCar, currentSpeed,N,pCar);
                 app.clear(Color::White);
 
                 if (pCar.x > 320)
