@@ -53,7 +53,7 @@ void carSpeed::getSpeed(keyControls& direction,Car car[],float& R, const int& N)
 
 	if(direction.boost)
 	{
-		maxSpeed = 20;
+		maxSpeed = 15;
 		acc = .5;
 		while(speed < maxSpeed)
 		{
