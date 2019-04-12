@@ -7,12 +7,10 @@
 //methods move and findTarget
 struct Rock
 {
-        Rock()
-        {
- 
-	}
-
-	void rockCollision(Sprite sRock, Car car[], Sprite& sCar, carSpeed& currentSpeed, const int N, Car playerCar);
+	int x;
+	int y;
+      
+	void rockCollision(Sprite sRock, Car car[],Sprite& playerSprite, Sprite& sCar, carSpeed& currentSpeed, const int N, Car playerCar);
 
 };
 

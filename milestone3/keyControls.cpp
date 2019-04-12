@@ -18,4 +18,8 @@ void keyControls::getDirection()
 	{
 		left = 1;
 	}
+	if(Keyboard::isKeyPressed(Keyboard::A))
+	{
+		boost = 1;
+	}
 }

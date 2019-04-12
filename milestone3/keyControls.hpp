@@ -10,13 +10,14 @@ struct keyControls
         bool right;
         bool down;
         bool left;
-
+	bool boost;
         keyControls()
         {
                 up = 0;
                 right = 0;
                 down = 0;
                 left = 0;
+		boost = 0;
         }
 
 	void getDirection();

@@ -15,6 +15,8 @@ using namespace sf;
 #include "game.hpp"
 #include "game.cpp"
 
+
+
 int main()
 {
 	gameStart gameBegin;

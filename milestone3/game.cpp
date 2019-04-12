@@ -15,18 +15,37 @@ void gameStart::game()
         t2.setSmooth(true);
 	t3.setSmooth(true);
 	player.setSmooth(true);
-        Sprite sBackground(t1), sCar(t2), sRock(t3),playerCar(player);
-        sBackground.scale(2, 2);
+        Sprite sBackground(t1), sCar(t2),playerCar(player);
 
+	Sprite sRock[10];
+	for(int i=0; i <10; ++i)
+	{
+		sRock[i].setTexture(t3);
+	}
+	
+	sBackground.scale(2, 2);
         sCar.setOrigin(22, 22);
 	playerCar.setOrigin(22,22);
+
         float R = 22;
 
         const int N = 6; // max
         Car pCar; 
 	Car car[N];
 	
-	Rock rock;
+	Rock rock[10] ={
+				{-400,-400},
+				{-800,-450},
+				{-1300,-900},
+				{-1400,-1500},
+				{-2000,-1600},
+				{-2500,-2000},
+				{-2600,-3000},
+				{-2000,-3300},
+				{-1500,-3250},
+				{-300,-2000}
+			};
+
         for (int i = 0; i < N; i++)
         {
                 car[i].x = 300 + i * 50;
@@ -66,9 +85,11 @@ void gameStart::game()
 
 		
 		//collision with rock
-		rock.rockCollision(sRock,car, playerCar, sCar, currentSpeed,N,pCar);
-                app.clear(Color::White);
-
+		for(int i =0; i <10; ++i)
+		{
+			rock[i].rockCollision(sRock[i],car, playerCar, sCar, currentSpeed,N,pCar);
+                }
+	
                 if (pCar.x > 320)
                 {
 			    currentSpeed.offsetX = pCar.x - 320;
@@ -81,11 +102,17 @@ void gameStart::game()
                 sBackground.setPosition(-currentSpeed.offsetX, -currentSpeed.offsetY);
                 app.draw(sBackground);
 		
-		sRock.setOrigin(-400,-400);
-		sRock.setPosition(-currentSpeed.offsetX, -currentSpeed.offsetY);
-		app.draw(sRock);
+		
+		for(int i=0; i <10; ++i)
+		{
+			sRock[i].setPosition(-currentSpeed.offsetX, -currentSpeed.offsetY);
+			sRock[i].setOrigin(rock[i].x,rock[i].y);
+			app.draw(sRock[i]);
 
-                Color colors[10] =
+		}
+
+		
+		Color colors[10] =
                 {
                       Color::Red, Color::Green, Color::Magenta, Color::Blue, Color::White, Color::Yellow, Color::Black,
                 };
