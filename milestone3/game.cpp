@@ -17,7 +17,7 @@ void gameStart::game()
         sCar.setOrigin(22, 22);
         float R = 22;
 
-        const int N = 5;
+        const int N = 7;
         Car car[N];
 
         for (int i = 0; i < N; i++)
@@ -64,7 +64,7 @@ void gameStart::game()
 
                 Color colors[10] =
                 {
-                      Color::Red, Color::Green, Color::Magenta, Color::Blue, Color::White
+                      Color::Red, Color::Green, Color::Magenta, Color::Blue, Color::White, Color::Yellow, Color::Black,
                 };
 
                 for (int i = 0; i < N; i++)
