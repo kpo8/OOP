@@ -8,10 +8,12 @@ void gameStart::game()
         Texture t1, t2, t3;
         t1.loadFromFile("images/background.png");
         t2.loadFromFile("images/car.png");
+	t3.loadFromFile("images/rock.png");
+
         t1.setSmooth(true);
         t2.setSmooth(true);
-
-        Sprite sBackground(t1), sCar(t2);
+	t3.setSmooth(true);
+        Sprite sBackground(t1), sCar(t2), sRock(t3);
         sBackground.scale(2, 2);
 
         sCar.setOrigin(22, 22);
@@ -19,7 +21,8 @@ void gameStart::game()
 
         const int N = 7;
         Car car[N];
-
+	
+	Rock rock;
         for (int i = 0; i < N; i++)
         {
                 car[i].x = 300 + i * 50;
@@ -27,7 +30,7 @@ void gameStart::game()
                 car[i].speed = 7 + i;
         }
         carSpeed currentSpeed;
-
+	
         while (app.isOpen())
         {
                 Event e;
@@ -47,7 +50,9 @@ void gameStart::game()
                 currentSpeed.getSpeed(direction,car,R,N);
                 // collision
                 collision(car,N,R);
-
+		
+		//collision with rock
+		rock.rockCollision(currentSpeed);
                 app.clear(Color::White);
 
                 if (car[0].x > 320)
@@ -61,6 +66,10 @@ void gameStart::game()
 
                 sBackground.setPosition(-currentSpeed.offsetX, -currentSpeed.offsetY);
                 app.draw(sBackground);
+		
+		sRock.setOrigin(-400,-400);
+		sRock.setPosition(-currentSpeed.offsetX, -currentSpeed.offsetY);
+		app.draw(sRock);
 
                 Color colors[10] =
                 {
