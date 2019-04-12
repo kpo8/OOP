@@ -1,6 +1,6 @@
 #include "carSpeed.hpp"
 
-void carSpeed::getSpeed(keyControls& direction,Car car[],float& R, const int& N)
+void carSpeed::getSpeed(keyControls& direction,Car car[],float& R, const int& N,Car& playerCar)
 {
 	if (direction.up && speed < maxSpeed)
 	{
@@ -68,14 +68,16 @@ void carSpeed::getSpeed(keyControls& direction,Car car[],float& R, const int& N)
 	
 	}
 
-	car[0].speed = speed;
-	car[0].angle = angle;
+	playerCar.speed = speed;
+	playerCar.angle = angle;
+
+	playerCar.move();
 
 	for (int i = 0; i < N; i++)
 	{
 		car[i].move();
 	}
-	for (int i = 1; i < N; i++)
+	for (int i = 0; i < N; i++)
 	{
 		car[i].findTarget();
 	}

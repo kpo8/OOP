@@ -12,7 +12,7 @@ struct Rock
  
 	}
 
-	void rockCollision(carSpeed currentSpeed);
+	void rockCollision(Sprite sRock, Car car[], Sprite& sCar, carSpeed& currentSpeed, const int N, Car playerCar);
 
 };
 

@@ -24,7 +24,7 @@ struct carSpeed
                 offsetY = 0;
         }
 
-	void getSpeed(keyControls& direction,Car car[],float& R, const int& N);
+	void getSpeed(keyControls& direction,Car car[],float& R, const int& N, Car& playerCar);
 };
 
 #endif

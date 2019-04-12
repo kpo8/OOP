@@ -5,22 +5,26 @@ void gameStart::game()
 	RenderWindow app(VideoMode(640, 480), "Car Racing Game!");
         app.setFramerateLimit(60);
 
-        Texture t1, t2, t3;
+        Texture t1, t2, t3, player;
         t1.loadFromFile("images/background.png");
         t2.loadFromFile("images/car.png");
 	t3.loadFromFile("images/rock.png");
+	player.loadFromFile("images/car.png");
 
         t1.setSmooth(true);
         t2.setSmooth(true);
 	t3.setSmooth(true);
-        Sprite sBackground(t1), sCar(t2), sRock(t3);
+	player.setSmooth(true);
+        Sprite sBackground(t1), sCar(t2), sRock(t3),playerCar(player);
         sBackground.scale(2, 2);
 
         sCar.setOrigin(22, 22);
+	playerCar.setOrigin(22,22);
         float R = 22;
 
-        const int N = 7;
-        Car car[N];
+        const int N = 6; // max
+        Car pCar; 
+	Car car[N];
 	
 	Rock rock;
         for (int i = 0; i < N; i++)
@@ -29,6 +33,12 @@ void gameStart::game()
                 car[i].y = 1700 + i * 80;
                 car[i].speed = 7 + i;
         }
+	
+	pCar.x = 300;
+	pCar.y = 1700;
+
+	pCar.speed = 7;
+
         carSpeed currentSpeed;
 	
         while (app.isOpen())
@@ -47,21 +57,21 @@ void gameStart::game()
                 direction.getDirection();
 
                 // car movement
-                currentSpeed.getSpeed(direction,car,R,N);
+                currentSpeed.getSpeed(direction,car,R,N, pCar);
                 // collision
                 collision(car,N,R);
 		
 		//collision with rock
-		rock.rockCollision(currentSpeed);
+		rock.rockCollision(sRock,car, sCar, currentSpeed,N,pCar);
                 app.clear(Color::White);
 
-                if (car[0].x > 320)
+                if (pCar.x > 320)
                 {
-			    currentSpeed.offsetX = car[0].x - 320;
+			    currentSpeed.offsetX = pCar.x - 320;
                 }
-                if (car[0].y > 240)
+                if (pCar.y > 240)
                 {
-                        currentSpeed.offsetY = car[0].y - 240;
+                        currentSpeed.offsetY = pCar.y - 240;
                 }
 
                 sBackground.setPosition(-currentSpeed.offsetX, -currentSpeed.offsetY);
@@ -78,11 +88,18 @@ void gameStart::game()
 
                 for (int i = 0; i < N; i++)
                 {
+			
                         sCar.setPosition(car[i].x - currentSpeed.offsetX, car[i].y - currentSpeed.offsetY);
                         sCar.setRotation(car[i].angle * 180 / 3.141593);
                         sCar.setColor(colors[i]);
                         app.draw(sCar);
-                }
+	        }
+	
+		playerCar.setPosition(pCar.x - currentSpeed.offsetX, pCar.y - currentSpeed.offsetY);
+                playerCar.setRotation(pCar.angle * 180 / 3.141593);
+		playerCar.setColor(colors[0]);
+		app.draw(playerCar);
+
 
                 app.display();
         }

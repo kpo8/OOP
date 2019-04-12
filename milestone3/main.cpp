@@ -10,6 +10,8 @@ using namespace sf;
 #include "keyControls.cpp"
 #include "carSpeed.hpp"
 #include "carSpeed.cpp"
+#include "rock.hpp"
+#include "rock.cpp"
 #include "game.hpp"
 #include "game.cpp"
 
