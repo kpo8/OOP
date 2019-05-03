@@ -1,0 +1,16 @@
+Milestone3
+
+Two features were added
+
+- one was a boost feature that can be done by pressing 'a'
+	- this was created editing the carspeed class
+- two was a obstacle class that slowed your car down and disrupted other cars
+	- this was a entire new class
+
+Other things
+- made the collision more fun
+- added more cars
+
+Things to fix
+
+Need to make map a fix sized.
